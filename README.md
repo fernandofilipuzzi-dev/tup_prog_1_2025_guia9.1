@@ -1,3 +1,3 @@
-# Guía 9.1. Algoritmos recursivos e iterativos
+# Guía 9.1 Arreglos - algoritmos de búsqueda y ordenamiento
 
-[Enunciado](https://docs.google.com/document/d/1Hl2BlAlBp7RhkLhxuO_A7pP-mIYJlZvs/preview)
+[Enunciado](https://docs.google.com/document/d/14P2RUroGbUqCCTckWBZp3DEvk0iAYvM6/preview)

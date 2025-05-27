@@ -11,7 +11,6 @@
             string[] nombres;
             int cantidad;
             string[] nombresEjemplo = new string[] { "Noemí", "Noelía", "Andrés", "Emilio", "Norberto", "Estefanía", "Daniela", "Valeria" };
-
             #endregion
 
             #region inicializaciones
@@ -27,11 +26,12 @@
             }
             #endregion
 
-
+            #region imprimir el listado
             for (int n = 0; n < cantidad; n++)
             {
-                Console.WriteLine($"{numeros[n]}; {nombres[n]}");
+                Console.WriteLine($"{n,10}; {numeros[n],10}; {nombres[n],-10}");
             }
+            #endregion
         }
     }
 }

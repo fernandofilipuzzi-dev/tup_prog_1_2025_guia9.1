@@ -40,6 +40,7 @@
             {
                 Console.WriteLine("Ingrese el nombre del alumno:");
                 string nombre = Console.ReadLine(); 
+
                 Console.WriteLine("Ingrese la nota:");
                 double nota = Convert.ToDouble(Console.ReadLine());
 

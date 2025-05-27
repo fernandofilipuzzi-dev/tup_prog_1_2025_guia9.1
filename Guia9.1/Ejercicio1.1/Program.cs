@@ -49,13 +49,14 @@ namespace Ejercicio1_1
                 #endregion
             }
             #endregion
+
             #endregion
 
             #region iterar vector
             acumulado = 0;
             for (int n = 0; n < contador; n++)
             {
-                #region actualizar contador
+                #region actualizar acumulador
                 acumulado += numeros[n];
                 #endregion
 

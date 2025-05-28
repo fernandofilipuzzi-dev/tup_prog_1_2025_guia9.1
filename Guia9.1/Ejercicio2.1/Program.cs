@@ -18,20 +18,32 @@ namespace Ejercicio2_1
                 while (izq<=fin && referencia > numeros[izq]) izq++ ;
 
                 //busco de derecha a izq para el cual el valor para el cual no se verifica que no sea mayor al pivote
-                while (der > inicio && referencia <= numeros[der]) der--;
+                while (der > inicio && referencia < numeros[der]) der--;
 
                 //si se verifica que lo encontro lo intercambio
                 if (izq < der)
                     Intercambiar(numeros, izq, der);
             }
-            Intercambiar(numeros, inicio, der);//der<izq
 
+            //aca se que el indice de la izquierda quedo a la derecha, y el de la derecha a la izq.
+            //por lo tanto el indice derecho esta apuntando a un valor menor - por lo tanto ahí hago el intercambio
+            #region inserto pivote - intercambiando el pivote por el valor menor 
+            int indicePivotenuevo = der;
+            Intercambiar(numeros, inicio, indicePivotenuevo);//der<izq
+            #endregion
             //ojo! der termina quedando a la izquierda - y es consecuencia de haber terminado el bucle 
 
-            if(inicio< der-1)
-                OrdenarQuicSort(numeros, inicio, der-1);
-            if(der +1 < fin)
-                OrdenarQuicSort(numeros, der + 1, fin);
+            //nos quedan dos listas, una a la izquierda del pivote y otra la derecha del pivote
+            //el pivote quedo en el indice=der
+            #region repetimos para la lista izq al pivote
+            if (inicio< indicePivotenuevo)
+                OrdenarQuicSort(numeros, inicio, indicePivotenuevo-1);
+            #endregion
+            
+            #region repetimos para la lista derecha
+            if (indicePivotenuevo+1 < fin)
+                OrdenarQuicSort(numeros, indicePivotenuevo + 1, fin);
+            #endregion
         }
 
         static void Intercambiar(int[] numeros, int idxL, int idxR)

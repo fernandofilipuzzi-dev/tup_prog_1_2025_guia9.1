@@ -26,11 +26,11 @@
             int n;
 
             #region encontrar donde insertar el pivote
-            while (izq < der)
+            while (izq <= der)
             {
                 #region voy dejando los terminos menores a la izquierda del pivate y los mayores a la derecha del pivote
-                while (izq <= fin && numeros[izq] < pivote) izq++;
-                while(der>inicio && numeros[der] > pivote) der--;
+                while (izq < der && numeros[izq] < pivote) izq++;
+                while(izq < der && numeros[der] >= pivote) der--;
                 if (izq < der)
                     Intercambiar(numeros, nombres, izq, der);
                 #endregion
@@ -47,8 +47,8 @@
             //nos quedan dos listas, una a la izquierda del pivote y otra la derecha del pivote
             //el pivote quedo en el indice=der
             #region repetimos para la lista izq al pivote
-            if(inicio<indicePivoteNuevo)
-                QuickSort(numeros, nombres, inicio, indicePivoteNuevo - 1);
+            if(inicio<indicePivoteNuevo-1)
+                QuickSort(numeros, nombres, inicio, indicePivoteNuevo -1);
             #endregion
             #region repetimos para la lista derecha
             if(indicePivoteNuevo<fin)

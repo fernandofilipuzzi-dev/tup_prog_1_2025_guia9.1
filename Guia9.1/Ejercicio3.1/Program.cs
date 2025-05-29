@@ -11,7 +11,7 @@
             int izq = inicio + 1;
             int der = fin;
 
-            while (izq <= der)
+            while (izq > der ==false )
             {
                 //busco de izq a derecha para el cual el valor para el cual no se verifica que no sea menor al pivote
                 while (izq <= fin && referencia > numeros[izq]) izq++;

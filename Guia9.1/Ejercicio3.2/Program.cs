@@ -115,7 +115,7 @@
 
         static void Main(string[] args)
         {
-            //ejercicio 2.1.a.y b
+            //ejercicio 2.2.a.y b
             #region declaraciones
             int[] numeros;
             string[] nombres;
@@ -153,7 +153,7 @@
             Console.WriteLine($"\n\n\nValor generado para la busqueda: {busqueda}");
             #endregion
 
-            //3.1.b
+            //3.2.b
             #region busqueda secuencial
             Console.WriteLine($"\n\nBusqueda secuencial\n");
             int idx = BusquedaSecuencial(numeros, 0, cantidad - 1, busqueda);

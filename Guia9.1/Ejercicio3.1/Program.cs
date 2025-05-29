@@ -17,7 +17,7 @@
                 while (izq <= fin && referencia > numeros[izq]) izq++;
 
                 //busco de derecha a izq para el cual el valor para el cual no se verifica que no sea mayor al pivote
-                while (der > inicio && referencia <= numeros[der]) der--;
+                while (der >= (inicio+1) && referencia <= numeros[der]) der--;
 
                 //si se verifica que lo encontro lo intercambio
                 if (izq < der)

@@ -16,19 +16,30 @@ namespace Ejercicio4_2
             double acumulado = 0;
             double promedio = 0;
 
-            int libretaNotaMayor = 0;
-            string nombreNotaMayor = "";
-            double notaMayor = 0;
-
-            int libretaNotaMenor = 0;
-            string nombreNotaMenor = "";
-            double notaMenor = 0;
+            string[] nombresSuperior;
+            int[] libretasSuperior;
+            double[] notasSuperior;
+            int contadorSuperior=0;
             #endregion
 
             #region inicializaciones
             nombres = new string[100];
             libretas = new int[100];
             notas = new double[100];
+
+            nombresSuperior = new string[100];
+            libretasSuperior = new int[100];
+            notasSuperior = new double[100];
+
+            //precargando ejemplos de prueba
+            nombres[contador] = "Julio";
+            libretas[contador] = 52;
+            notas[contador] = 99;
+            contador++;
+            nombres[contador] = "Maria";
+            libretas[contador] = 2;
+            notas[contador] = 9;
+            contador++;
             #endregion
 
             #region Solicitar conjunto de datos
@@ -70,36 +81,34 @@ namespace Ejercicio4_2
                 {
                     acumulado += notas[n];
 
-                    #region verificar si notas en índice es mayor
-                    if (n == 0 || notas[n] > notaMayor)
-                    {
-                        libretaNotaMayor = libretas[n];
-                        nombreNotaMayor = nombres[n];
-                        notaMayor = notas[n];
-                    }
-                    #endregion
-
-                    #region verificar si número en índice es menor
-                    if (n == 0 || notas[n] < notaMenor)
-                    {
-                        libretaNotaMenor = libretas[n];
-                        nombreNotaMenor = nombres[n];
-                        notaMenor = notas[n];
-                    }
-                    #endregion
                 }
             }
             #endregion
 
             #region verificar si se ingresó números / procesar resultados
-            promedio = 0;
             if (contador > 0)
             {
-                promedio = 1.0 * acumulado / contador;
+                promedio = acumulado / contador;
+                Console.WriteLine($"Promedio: {promedio:f2}");
 
-                Console.WriteLine($"Nota Promedio: {promedio:f2}");
-                Console.WriteLine($"El alumno: {nombreNotaMayor}({libretaNotaMayor}) es el primero con la mayor nota: {notaMayor}");
-                Console.WriteLine($"El alumno: {nombreNotaMenor}({libretaNotaMenor}) es el primero con la menor nota: {notaMenor}");
+                contadorSuperior = 0;
+                for (int n = 0; n < contador; n++)
+                {
+                    if (notas[n] > promedio)
+                    {
+                        nombresSuperior[contadorSuperior] = nombres[n];
+                        libretasSuperior[contadorSuperior] = libretas[n];
+                        notasSuperior[contadorSuperior] = notas[n];
+
+                        contadorSuperior++;
+                    }
+                }
+
+                Console.WriteLine("Listado de numeros superiores al promedio: ");
+                for (int n = 0; n < contadorSuperior; n++)
+                {
+                    Console.WriteLine($"{libretasSuperior[n],10}{nombresSuperior[n],10};{notasSuperior[n],10}");
+                }
             }
             else
             {

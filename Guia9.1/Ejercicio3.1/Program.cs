@@ -4,12 +4,14 @@
     {
         static Random azar = new Random();
 
-        static void OrdenarQuicSort(int[] numeros, int inicio, int fin)
+        #region resolución del problema 2.1
+        static void QuickSort(int[] numeros, int inicio, int fin)
         {
             int referencia = numeros[inicio];
             int izq = inicio + 1;
             int der = fin;
-            while (izq < der)
+
+            while (izq <= der)
             {
                 //busco de izq a derecha para el cual el valor para el cual no se verifica que no sea menor al pivote
                 while (izq <= fin && referencia > numeros[izq]) izq++;
@@ -21,22 +23,36 @@
                 if (izq < der)
                     Intercambiar(numeros, izq, der);
             }
-            Intercambiar(numeros, inicio, der);//der<izq
 
+            //aca se que el indice de la izquierda quedo a la derecha, y el de la derecha a la izq.
+            //por lo tanto el indice derecho esta apuntando a un valor menor - por lo tanto ahí hago el intercambio
+            #region inserto pivote - intercambiando el pivote por el valor menor 
+            int indicePivotenuevo = der;
+            Intercambiar(numeros, inicio, indicePivotenuevo);//der<izq
+            #endregion
             //ojo! der termina quedando a la izquierda - y es consecuencia de haber terminado el bucle 
 
-            if (inicio < der - 1)
-                OrdenarQuicSort(numeros, inicio, der - 1);
-            if (der + 1 < fin)
-                OrdenarQuicSort(numeros, der + 1, fin);
+            //nos quedan dos listas, una a la izquierda del pivote y otra la derecha del pivote
+            //el pivote quedo en el indice=der
+            #region repetimos para la lista izq al pivote
+            if (inicio < indicePivotenuevo)
+                QuickSort(numeros, inicio, indicePivotenuevo - 1);
+            #endregion
+
+            #region repetimos para la lista derecha
+            if (indicePivotenuevo + 1 < fin)
+                QuickSort(numeros, indicePivotenuevo + 1, fin);
+            #endregion
         }
 
-        static void Intercambiar(int[] numeros, int idxL, int idxR)
+        static void Intercambiar(int[] numeros, int indicea, int indiceb)
         {
-            int temp = numeros[idxL];
-            numeros[idxL] = numeros[idxR];
-            numeros[idxR] = temp;
+            int numeroTmp = numeros[indicea];
+            numeros[indicea] = numeros[indiceb];
+            numeros[indiceb] = numeroTmp;
         }
+
+        #endregion
 
         static int BusquedaBinaria(int[] numeros, int inicio, int fin, int buscado)
         {
@@ -65,8 +81,26 @@
             return idx;
         }
 
+        static int BusquedaSecuencial(int[] numeros, int inicio, int fin, int buscado)
+        { 
+            int idx = -1;
+
+            //OJO! - fin no es cantidad - fin es el ultimo indice=cantidad-1
+            int n = inicio;
+            while(idx==-1 && n<=fin)
+            {
+                if (numeros[n] == buscado)
+                    idx = n;
+                n++;
+            }
+
+            return idx;
+        }
+
         static void Main(string[] args)
         {
+            //ejercicio 2.1.a.y b
+
             #region declaraciones
             int[] numeros;
             int cantidad;
@@ -82,52 +116,51 @@
             #endregion
 
             #region Imprimiendo listado
-            for (int n = 0; n < cantidad; ++n)
-            {
-                Console.Write(numeros[n] + " ");
-            }
-            #endregion
-
-            #region ordenamiento - método burbuja
-            for (int n = 0; n < cantidad - 1; n++) //recorre el vector hasta una posición anterior al último
-            {
-                for (int n_sig = n + 1; n_sig < cantidad; n_sig++) //recorre los siguientes - si verifica invierte
-                {
-                    if (numeros[n_sig] > numeros[n])
-                    {
-                        #region intercambia los registros
-                        int tmp = numeros[n_sig];
-                        numeros[n_sig] = numeros[n];
-                        numeros[n] = tmp;
-                        #endregion
-                    }
-                }
-            }
-            Console.WriteLine("\n");
-
-            for (int n = 0; n < cantidad; ++n)
-            {
-                Console.Write(numeros[n] + " ");
-            }
-            Console.WriteLine("\n");
-            #endregion
-
-            #region Ordenamiento quicksort
-            Console.WriteLine("Ordenamiento quicksort");
-            OrdenarQuicSort(numeros, 0, cantidad - 1);
+            Console.WriteLine($"Listado original\n");
             for (int n = 0; n < cantidad; ++n)
             {
                 Console.Write($"{n}:{numeros[n]} ");
             }
-            Console.WriteLine("\n");
             #endregion
 
+            //ejercicio 3.1
+
+            //3.1.a
             #region generando valor para busqueda y busqueda
-            int busqueda = azar.Next(1, 201);
+            int busquedaIdx = azar.Next(0, cantidad);
+            int busqueda = numeros[busquedaIdx];
+            Console.WriteLine($"\n\n\nValor generado para la busqueda: {busqueda}");
+            #endregion
 
-            Console.WriteLine($"\nValor buscado: {busqueda}");
+            //3.1.b
+            #region busqueda secuencial
+            Console.WriteLine($"\n\nBusqueda secuencial\n");
+            int idx = BusquedaSecuencial(numeros, 0, cantidad-1, busqueda);            
+            if (idx != -1)
+            {
+                Console.WriteLine($"Posicion encontrada: {idx}");
+            }
+            else
+            {
+                Console.WriteLine($"Valor no encontrado");
+            }
+            #endregion
 
-            int idx = BusquedaBinaria(numeros, 0, cantidad, busqueda);
+            //3.1.c
+            #region busqueda binaria
+            //hay que ordenar primero
+            #region ordenando previo a la busqueda
+            Console.WriteLine($"\n\nLista ordenada\n");
+            QuickSort(numeros, 0, cantidad - 1);
+            for (int n = 0; n < cantidad; ++n)
+            {
+                Console.Write($"{n}:{numeros[n]} ");
+            }
+            #endregion
+
+            Console.WriteLine($"\n\nBusqueda binaria\n");
+            //ojo! paso la posición inicial  y final no la cantidad
+            idx = BusquedaBinaria(numeros, 0, cantidad-1, busqueda);
             if (idx != -1)
             {
                 Console.WriteLine($"Posicion encontrada: {idx}");

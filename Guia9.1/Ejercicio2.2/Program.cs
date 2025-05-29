@@ -4,7 +4,7 @@
     {
         static Random azar = new Random();
 
-        static void Burbuja(int[] numeros ,string[] nombres, int cantidad)
+        static void Burbuja(int[] numeros, string[] nombres, int cantidad)
         {
             for (int act = 0; act < cantidad - 1; act++)
             {
@@ -18,43 +18,44 @@
             }
         }
 
-        static void QuickSort(int[] numeros, string[] nombres, int inicio, int fin)
+        static void QuickSort(int[] numeros,string[] nombres, int inicio, int fin)
         {
-            int pivote = numeros[0];
-            int izq = inicio;
+            int referencia = numeros[inicio];
+            int izq = inicio + 1;
             int der = fin;
-            int n;
 
-            #region encontrar donde insertar el pivote
             while (izq <= der)
             {
-                #region voy dejando los terminos menores a la izquierda del pivate y los mayores a la derecha del pivote
-                while (izq < der && numeros[izq] < pivote) izq++;
-                while(izq < der && numeros[der] >= pivote) der--;
+                //busco de izq a derecha para el cual el valor para el cual no se verifica que no sea menor al pivote
+                while (izq <= fin && referencia > numeros[izq]) izq++;
+
+                //busco de derecha a izq para el cual el valor para el cual no se verifica que no sea mayor al pivote
+                while (der > inicio && referencia <= numeros[der]) der--;
+
+                //si se verifica que lo encontro lo intercambio
                 if (izq < der)
                     Intercambiar(numeros, nombres, izq, der);
-                #endregion
             }
-            #endregion
 
             //aca se que el indice de la izquierda quedo a la derecha, y el de la derecha a la izq.
             //por lo tanto el indice derecho esta apuntando a un valor menor - por lo tanto ahí hago el intercambio
             #region inserto pivote - intercambiando el pivote por el valor menor 
-            int indicePivoteNuevo = der;
-            Intercambiar(numeros, nombres, inicio, indicePivoteNuevo);
+            int indicePivotenuevo = der;
+            Intercambiar(numeros, nombres, inicio, indicePivotenuevo);//der<izq
             #endregion
+            //ojo! der termina quedando a la izquierda - y es consecuencia de haber terminado el bucle 
 
             //nos quedan dos listas, una a la izquierda del pivote y otra la derecha del pivote
             //el pivote quedo en el indice=der
             #region repetimos para la lista izq al pivote
-            if(inicio<indicePivoteNuevo-1)
-                QuickSort(numeros, nombres, inicio, indicePivoteNuevo -1);
-            #endregion
-            #region repetimos para la lista derecha
-            if(indicePivoteNuevo<fin)
-                QuickSort(numeros, nombres, indicePivoteNuevo+1, fin);
+            if (inicio < indicePivotenuevo)
+                QuickSort(numeros, nombres, inicio, indicePivotenuevo - 1);
             #endregion
 
+            #region repetimos para la lista derecha
+            if (indicePivotenuevo + 1 < fin)
+                QuickSort(numeros, nombres, indicePivotenuevo + 1, fin);
+            #endregion
         }
 
         static void Intercambiar(int[] numeros, string[] nombres, int indicea, int indiceb)
@@ -98,6 +99,7 @@
             }
             #endregion
 
+            //copiando el vector para no alterar el original
             #region copiando el vector
             int[] numeroscpy= new int[cantidad];
             string[] nombrescpy = new string[cantidad];
@@ -118,6 +120,7 @@
             }
             #endregion
 
+            //copiando el vector para no alterar el original
             #region copiando el vector
             numeroscpy = new int[cantidad];
             nombrescpy = new string[cantidad];

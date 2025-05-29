@@ -7,18 +7,19 @@ namespace Ejercicio2_1
     {
         static Random azar=new Random();
 
-        static void OrdenarQuicSort(int[] numeros,int inicio, int fin)
+        static void QuickSort(int[] numeros,int inicio, int fin)
         {
             int referencia = numeros[inicio];
             int izq = inicio+1;
             int der = fin;
+
             while (izq <= der)
             {
                 //busco de izq a derecha para el cual el valor para el cual no se verifica que no sea menor al pivote
                 while (izq<=fin && referencia > numeros[izq]) izq++ ;
 
                 //busco de derecha a izq para el cual el valor para el cual no se verifica que no sea mayor al pivote
-                while (der > inicio && referencia < numeros[der]) der--;
+                while (der > inicio && referencia <= numeros[der]) der--;
 
                 //si se verifica que lo encontro lo intercambio
                 if (izq < der)
@@ -37,12 +38,12 @@ namespace Ejercicio2_1
             //el pivote quedo en el indice=der
             #region repetimos para la lista izq al pivote
             if (inicio< indicePivotenuevo)
-                OrdenarQuicSort(numeros, inicio, indicePivotenuevo-1);
+                QuickSort(numeros, inicio, indicePivotenuevo-1);
             #endregion
             
             #region repetimos para la lista derecha
             if (indicePivotenuevo+1 < fin)
-                OrdenarQuicSort(numeros, indicePivotenuevo + 1, fin);
+                QuickSort(numeros, indicePivotenuevo + 1, fin);
             #endregion
         }
 
@@ -52,34 +53,7 @@ namespace Ejercicio2_1
             numeros[idxL] = numeros[idxR];
             numeros[idxR]=temp;
         }
-
-        static int BusquedaBinaria(int [] numeros, int inicio, int fin, int buscado)
-        {
-            int idx=-1;
-            int medio;
-
-            do
-            {
-                medio = ( inicio+ fin) / 2;
-
-                if (numeros[medio] == buscado)
-                {
-                    idx = medio;
-                }
-                else if (buscado < numeros[medio])
-                {
-                    fin = medio - 1;
-                }
-                else if (buscado > numeros[medio])
-                { 
-                    inicio = medio + 1;
-                }
-
-            } while (idx == -1 && inicio<fin);
-                        
-            return idx;            
-        }
-
+              
         static void Main(string[] args)
         {
             #region declaraciones
@@ -129,7 +103,7 @@ namespace Ejercicio2_1
 
             #region Ordenamiento quicksort
             Console.WriteLine("Ordenamiento quicksort");
-            OrdenarQuicSort(numeros, 0, cantidad - 1);
+            QuickSort(numeros, 0, cantidad - 1);
             for (int n = 0; n < cantidad; ++n)
             {
                 Console.Write($"{n}:{numeros[n]} ");
@@ -137,21 +111,6 @@ namespace Ejercicio2_1
             Console.WriteLine("\n");
             #endregion
 
-            #region generando valor para busqueda y busqueda
-            int busqueda = azar.Next(1, 201);
-
-            Console.WriteLine($"\nValor buscado: {busqueda}");
-
-            int idx = BusquedaBinaria(numeros, 0, cantidad, busqueda);
-            if (idx != -1)
-            {
-                Console.WriteLine($"Posicion encontrada: {idx}");
-            }
-            else
-            {
-                Console.WriteLine($"Valor no encontrado");
-            }
-            #endregion
         }
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.36105.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio1.1", "Ejercicio1.1\Ejercicio1.1.csproj", "{D333FEF1-4735-4615-A62A-15E3BCEE37A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio1.1_introduccion", "Ejercicio1.1\Ejercicio1.1_introduccion.csproj", "{D333FEF1-4735-4615-A62A-15E3BCEE37A9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio1.2.a", "Ejercicio1.2.a\Ejercicio1.2.a.csproj", "{B7CBEC80-00D3-4DF5-8A57-693E74F8B279}"
 EndProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IV.Filtrado", "IV.Filtrado"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio4.1", "Ejercicio4.1\Ejercicio4.1.csproj", "{DB020D25-0863-48ED-B78D-7D7732C993CB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ejercicio1.2", "Ejercicio1.2", "{6995236C-DA76-44B6-BFD6-9B4BA7F9A393}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ejercicio1.2_varios_vectores", "Ejercicio1.2_varios_vectores", "{6995236C-DA76-44B6-BFD6-9B4BA7F9A393}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ejercicio1.2.b", "Ejercicio1.2.b\Ejercicio1.2.b.csproj", "{859C5EEA-9AA8-4131-BBFA-4BE44F61CD83}"
 EndProject
